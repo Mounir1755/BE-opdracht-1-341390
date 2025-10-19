@@ -85,6 +85,8 @@ class LeverantieController extends Controller
             if ($isNietOpVoorraad) {
                 $VolgendeLevering = $levering->VolgendeLevering;
             }
+        } else {
+            return "Er is iets fout gegaan!";
         }
 
         return view('leverantie.show', [
