@@ -1,0 +1,90 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\LeverantieModel;
+
+class LeverantieController extends Controller
+{
+    private $leverantieModel;
+
+    public function __construct()
+    {
+        $this->leverantieModel = new LeverantieModel();
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $leveringeninfo = $this->leverantieModel->sp_GetAllLeveringInfo();
+
+        return view('leverantie.index', [
+            'title' => 'Levering informatie',
+            'leveringeninfo' => $leveringeninfo
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $leveringinfo = $this->leverantieModel->sp_GetLeveringInfoById($id);
+        $leverancier = $leveringinfo[0] ?? '';
+        
+        $isOpVoorraad = $leveringinfo[0]->MagazijnAantal == null;
+
+        // dd($leveringinfo);
+        
+        return view('leverantie.show', [
+            'title' => 'Leverings Informatie',
+            'leveringinfo' => $leveringinfo,
+            'leverancier' => $leverancier,
+            'isOpVoorraad' => $isOpVoorraad
+        ]);
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $leverantie)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $leverantie)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $leverantie)
+    {
+        //
+    }
+}
