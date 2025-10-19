@@ -49,18 +49,52 @@ class LeverantieController extends Controller
     public function show($id)
     {
         $leveringinfo = $this->leverantieModel->sp_GetLeveringInfoById($id);
-        $leverancier = $leveringinfo[0] ?? '';
         
-        $isOpVoorraad = $leveringinfo[0]->MagazijnAantal == null;
+        
+        /*
+        * Standaardwaarden instellen
+        * 
+        * $VolgendeLevering -> voorkomt undefined variabele fouten
+        * $isOpVoorraad -> wordt later aangepast op basis van databasegegevens
+        */
+        $VolgendeLevering = null;
+        $isNietOpVoorraad = false;
 
-        // dd($leveringinfo);
-        
+        // Checkt of $leveringinfo niet leeg is
+        if (!empty($leveringinfo)) {
+
+            /*
+            * Stopt info van de eerste record in $levering
+            * om dat later te gebruiken voor de voorraad check
+            */
+            $levering = $leveringinfo[0];
+
+            // Stopt leverancier info van de eerste record in $leverancier
+            $leverancier = $leveringinfo[0] ?? ''; // ?? checkt of de 1ste veld niet null is ander gebruikt hij de 2de veld
+
+            /*
+            * Voorraad checken
+            * 
+            * $isNietOpVoorraad checkt of het aantal aanwezig in de magazijn null
+            * als $isNietOpVoorraad null is zal de if statement in de show view true zijn en wordt de functie uitgevoerd
+            */
+            $isNietOpVoorraad = $levering->MagazijnAantal === null; // === checkt of het PRECIES hetzelfde is
+                                                                    // eigenlijk niet goed maar voor nu goed genoeg want kan ook 0 zijn en niet null
+            
+            // Als $isNietOpVoorraad true is als dat zo is word volgende levering opgeslagen in $VolgendeLevering
+            if ($isNietOpVoorraad) {
+                $VolgendeLevering = $levering->VolgendeLevering;
+            }
+        }
+
         return view('leverantie.show', [
             'title' => 'Leverings Informatie',
             'leveringinfo' => $leveringinfo,
             'leverancier' => $leverancier,
-            'isOpVoorraad' => $isOpVoorraad
+            'isNietOpVoorraad' => $isNietOpVoorraad,
+            'VolgendeLevering' => $VolgendeLevering
         ]);
+
     }
 
 

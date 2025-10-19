@@ -31,9 +31,9 @@
                     <p><strong>Mobiel:</strong> {{ $leverancier->Mobiel }}</p>
                 @endif 
 
-                @if( $isOpVoorraad )
+                @if( $isNietOpVoorraad )
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <p class="text-danger">er is op dit moment geen voorraad ik weet de unhappy scenario niet meer maar ja ik heb dit gewoon gedaan :)</p>
+                        <p class="text-danger">Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: {{ $VolgendeLevering }}</p>
                         <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
                     </div>
                     <meta http-equiv="refresh" content="3;url={{ route('magazijn.index') }}">
