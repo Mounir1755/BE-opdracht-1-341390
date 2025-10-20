@@ -42,6 +42,13 @@ class AllergeenModel extends Model
         ]);
     }
 
+    public function sp_GetProductAllergenenById($id)
+    {
+        return DB::select('CALL sp_GetProductAllergenenById(:id)', [
+            'id' => $id
+        ]);
+    }
+
     public function sp_UpdateAllergeen($id, $naam, $omschrijving)
     {
         $row = DB::selectOne(
