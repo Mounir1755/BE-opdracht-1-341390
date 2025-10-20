@@ -47,9 +47,9 @@
                                 @endif
                             </td>
                             <td>
-                                <button type="submit" class="btn btn-danger w-100">
+                                <a href="{{ route('allergeen.show', $product->Id) }}"  class="btn btn-danger w-100">
                                     <i class="bi bi-info-lg"></i>
-                                </button>
+                                </a>
                             </td>
                             <td>
                                 <a href="{{ route('leverantie.show', $product->Id) }}" class="btn btn-primary w-100">
