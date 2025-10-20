@@ -1,10 +1,3 @@
-{{-- TO DO:
-        FIX DE FOUT WAAR ISOPVOORRAAD ALTIJD JA IS OMDAT HET OUTDATED DATA GEBRUIKT
-        MOET EIGENLIJK DATA GEBRUIKEN VAN MAGAZIJN EN NIET PROD PER LEVERANCIER
-
-        IS OPVOORRAAD LOGICA ZIT IN CONTROLLER
- --}}
-
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <!DOCTYPE html>
 <html lang="en">

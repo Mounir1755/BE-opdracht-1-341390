@@ -68,6 +68,7 @@ class AllergeenController extends Controller
     {
         $allergeneninfo = $this->allergeenModel->sp_GetProductAllergenenById($id);
         
+        $productinfo = null;
         if (!empty($allergeneninfo)) {
             $productinfo = $allergeneninfo[0] ?? '';
         }
