@@ -29,7 +29,7 @@
                         <p class="text-danger">Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: {{ $VolgendeLevering }}</p>
                         <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
                     </div>
-                    <meta http-equiv="refresh" content="3;url={{ route('magazijn.index') }}">
+                    <meta http-equiv="refresh" content="4;url={{ route('magazijn.index') }}">
                 @else
 
                     <table class="table table-striped table-bordered align-middle shadow-sm mt-3">
