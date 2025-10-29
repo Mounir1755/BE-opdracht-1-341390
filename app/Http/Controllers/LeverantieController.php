@@ -74,7 +74,7 @@ class LeverantieController extends Controller
 
             /*
             * Voorraad checken
-            * 
+            *   
             * $isNietOpVoorraad checkt of het aantal aanwezig in de magazijn null
             * als $isNietOpVoorraad null is zal de if statement in de show view true zijn en wordt de functie uitgevoerd
             */
@@ -85,6 +85,7 @@ class LeverantieController extends Controller
             if ($isNietOpVoorraad) {
                 $VolgendeLevering = $levering->VolgendeLevering;
             }
+
         } else {
             return "Er is iets fout gegaan!";
         }
