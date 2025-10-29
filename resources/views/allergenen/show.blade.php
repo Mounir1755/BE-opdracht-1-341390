@@ -49,7 +49,7 @@
                         <p class="text-danger">In dit product zitten geen stoffen die een allergische reactie kunnen veroorzaken</p>
                         <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
                     </div>
-                    <meta http-equiv="refresh" content="3;url={{ route('magazijn.index') }}">
+                    <meta http-equiv="refresh" content="4;url={{ route('magazijn.index') }}">
                 @endif
             </div>
         </div>
