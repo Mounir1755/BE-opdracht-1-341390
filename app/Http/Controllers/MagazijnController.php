@@ -22,7 +22,7 @@ class MagazijnController extends Controller
 
 
         return view('magazijn.index', [
-            'title' => 'producten',
+            'title' => 'Overzicht Magazijn Jamin',
             'producten' => $producten
         ]);
     }
