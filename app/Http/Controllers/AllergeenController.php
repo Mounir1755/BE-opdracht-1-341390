@@ -64,8 +64,7 @@ class AllergeenController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
+    public function show($id) {
         $allergeneninfo = $this->allergeenModel->sp_GetProductAllergenenById($id);
         
         $productinfo = null;
@@ -73,7 +72,7 @@ class AllergeenController extends Controller
             $productinfo = $allergeneninfo[0] ?? '';
         }
         return view('allergenen.show', [
-            'title' => 'allergenen informatie',
+            'title' => 'Overzicht Allergeen',
             'allergeneninfo' => $allergeneninfo,
             'productinfo' => $productinfo
         ]);
