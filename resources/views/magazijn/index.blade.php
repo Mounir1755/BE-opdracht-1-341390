@@ -52,7 +52,7 @@
                                 </a>
                             </td>
                             <td>
-                                <a href="{{ route('leverantie.show', $product->Id) }}" class="btn btn-primary w-100">
+                                <a href="{{ route('magazijn.show', $product->Id) }}" class="btn btn-primary w-100">
                                     <i class="bi bi-book"></i>
                                 </a>
                             </td>

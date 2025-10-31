@@ -17,7 +17,7 @@ Route::get('/magazijn', [MagazijnController::class, 'index'])->name('magazijn.in
 
 Route::get('/levering-info', [LeverantieController::class, 'index'])->name('leverantie.index');
 
-Route::get('/leverantie/{id}', [LeverantieController::class, 'show'])->name('leverantie.show');
+Route::get('/magazijn/{id}', [MagazijnController::class, 'show'])->name('magazijn.show');
 
 Route::get('/allergeen', [AllergeenController::class, 'index'])->name('allergeen.index');
 
