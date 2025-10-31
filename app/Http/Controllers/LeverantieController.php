@@ -19,11 +19,11 @@ class LeverantieController extends Controller
      */
     public function index()
     {
-        $leveringeninfo = $this->leverantieModel->sp_GetAllLeveringInfo();
+        $leveranciers = $this->leverantieModel->sp_GetAllLeveringInfo();
 
         return view('leverantie.index', [
-            'title' => 'Levering informatie',
-            'leveringeninfo' => $leveringeninfo
+            'title' => 'Overzicht Leveranciers',
+            'leveringeninfo' => $leveranciers
         ]);
     }
 
