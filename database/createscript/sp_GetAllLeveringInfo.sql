@@ -19,7 +19,7 @@ BEGIN
     GROUP BY 
         LVRN.Id, LVRN.Naam, LVRN.ContactPersoon, LVRN.LeverancierNummer, LVRN.Mobiel
     ORDER BY 
-        LVRN.Naam;
+        TotaalProducten DESC;
 END$$
 
 DELIMITER ;
