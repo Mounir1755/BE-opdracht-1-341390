@@ -11,4 +11,6 @@ class LeverantieModel extends Model
     {
         return DB::select('CALL Sp_GetAllLeveringInfo');
     }
+
+    
 }
