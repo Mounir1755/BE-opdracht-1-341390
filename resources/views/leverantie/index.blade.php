@@ -34,7 +34,7 @@
                                 <td>{{ $info->TotaalProducten}}</td>
                                 <td>
                                     {{-- Maak function in controller en model die sp aanroept zodat info opgehaald kan worden op product naam --}}
-                                    <a {{-- href="{{ route('leverantie.show', $info->Id) }}" --}}class="btn btn-primary w-100">
+                                    <a href="{{ route('leverantie.show', $info->id) }}"class="btn btn-primary w-100">
                                         <i class="bi bi-box"></i>
                                     </a>
                                 </td>

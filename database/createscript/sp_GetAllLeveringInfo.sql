@@ -5,6 +5,7 @@ DELIMITER $$
 CREATE PROCEDURE Sp_GetAllLeveringInfo()
 BEGIN
     SELECT 
+        LVRN.id,
         LVRN.Naam AS LeverancierNaam,
         LVRN.ContactPersoon,
         LVRN.LeverancierNummer,

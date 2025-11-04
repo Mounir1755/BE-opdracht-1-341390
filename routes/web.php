@@ -13,11 +13,14 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/magazijn', [MagazijnController::class, 'index'])->name('magazijn.index');
 
 Route::get('/levering-info', [LeverantieController::class, 'index'])->name('leverantie.index');
 
+Route::get('/levering-info/{id}', [LeverantieController::class, 'show'])->name('leverantie.show');
+
 Route::get('/magazijn/{id}', [MagazijnController::class, 'show'])->name('magazijn.show');
+
+Route::get('/magazijn', [MagazijnController::class, 'index'])->name('magazijn.index');
 
 Route::get('/allergeen', [AllergeenController::class, 'index'])->name('allergeen.index');
 

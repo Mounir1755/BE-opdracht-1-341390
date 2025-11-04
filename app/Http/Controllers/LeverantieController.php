@@ -20,7 +20,7 @@ class LeverantieController extends Controller
     public function index()
     {
         $leveranciers = $this->leverantieModel->sp_GetAllLeveringInfo();
-
+        // dd($leveranciers);
         return view('leverantie.index', [
             'title' => 'Overzicht Leveranciers',
             'leveringeninfo' => $leveranciers
@@ -48,7 +48,13 @@ class LeverantieController extends Controller
      */
     public function show($id)
     {
+        $leverancierinfo = $this->leverantieModel->sp_GetLeverancierInfoById($id);
+        // dd($leverancierinfo[0]);
 
+        return view('leverantie.show', [
+            'title' => 'Geleverde producten',
+            'leverancierinfo' => $leverancierinfo[0]
+        ]);
     }
 
 

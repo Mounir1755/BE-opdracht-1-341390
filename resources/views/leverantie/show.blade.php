@@ -10,21 +10,20 @@
 <body>
 <div class="container mt-5">
     {{-- Controlleert of er data is --}}
-    @if(count($leveringinfo) > 0)
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white"></div>
             <div class="card-body">
                 <h1>{{ $title }}</h1>
                 <hr style="border: rgb(0, 0, 0) 1px solid;" class="w-90">
 
-                @if($leverancier)
-                    <p><strong>Leverancier:</strong> {{ $leverancier->LeverancierNaam }}</p>
-                    <p><strong>Contactpersoon:</strong> {{ $leverancier->ContactPersoon }}</p>
-                    <p><strong>Leveranciernummer:</strong> {{ $leverancier->LeverancierNummer }}</p>
-                    <p><strong>Mobiel:</strong> {{ $leverancier->Mobiel }}</p>
+                @if($leverancierinfo)
+                    <p><strong>Leverancier:</strong> {{ $leverancierinfo->LeverancierNaam }}</p>
+                    <p><strong>Contactpersoon:</strong> {{ $leverancierinfo->ContactPersoon }}</p>
+                    <p><strong>Leveranciernummer:</strong> {{ $leverancierinfo->LeverancierNummer }}</p>
+                    <p><strong>Mobiel:</strong> {{ $leverancierinfo->Mobiel }}</p>
                 @endif 
 
-                @if( $isNietOpVoorraad )
+                {{-- @if( $isNietOpVoorraad )
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <p class="text-danger">Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: {{ $VolgendeLevering }}</p>
                         <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
@@ -61,13 +60,9 @@
                         </tbody>
                     </table>
 
-                @endif
+                @endif --}}
             </div>
         </div>
-
-    @else
-        <div class="alert alert-warning">Geen levering gevonden.</div>
-    @endif
     <a href="{{ route('magazijn.index') }}" class="btn btn-primary mt-3 w-25">Terug</a>
 </div>
 </body>

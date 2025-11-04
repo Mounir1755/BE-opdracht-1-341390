@@ -12,5 +12,7 @@ class LeverantieModel extends Model
         return DB::select('CALL Sp_GetAllLeveringInfo');
     }
 
-    
+    public function sp_GetLeverancierInfoById($id) {
+        return DB::select('CALL Sp_GetLeverancierInfoById(?)', [$id]);
+    }
 }
