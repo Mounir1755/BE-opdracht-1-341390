@@ -49,11 +49,14 @@ class LeverantieController extends Controller
     public function show($id)
     {
         $leverancierinfo = $this->leverantieModel->sp_GetLeverancierInfoById($id);
-        // dd($leverancierinfo[0]);
+        $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
+        
+        // dd($productleveringinfo);
 
         return view('leverantie.show', [
             'title' => 'Geleverde producten',
-            'leverancierinfo' => $leverancierinfo[0]
+            'leverancierinfo' => $leverancierinfo[0],
+            'productleveringinfo' => $productleveringinfo
         ]);
     }
 

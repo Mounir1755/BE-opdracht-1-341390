@@ -15,4 +15,8 @@ class LeverantieModel extends Model
     public function sp_GetLeverancierInfoById($id) {
         return DB::select('CALL Sp_GetLeverancierInfoById(?)', [$id]);
     }
+
+    public function sp_GetProductLeveringInfo($id) {
+        return DB::select('CALL Sp_GetProductLeveringInfo(?)', [$id]);
+    }
 }

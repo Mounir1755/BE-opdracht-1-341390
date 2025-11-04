@@ -8,62 +8,52 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 <body>
-<div class="container mt-5">
-    {{-- Controlleert of er data is --}}
+    <div class="container mt-5">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white"></div>
             <div class="card-body">
                 <h1>{{ $title }}</h1>
                 <hr style="border: rgb(0, 0, 0) 1px solid;" class="w-90">
-
+            
                 @if($leverancierinfo)
                     <p><strong>Leverancier:</strong> {{ $leverancierinfo->LeverancierNaam }}</p>
                     <p><strong>Contactpersoon:</strong> {{ $leverancierinfo->ContactPersoon }}</p>
                     <p><strong>Leveranciernummer:</strong> {{ $leverancierinfo->LeverancierNummer }}</p>
                     <p><strong>Mobiel:</strong> {{ $leverancierinfo->Mobiel }}</p>
                 @endif 
-
-                {{-- @if( $isNietOpVoorraad )
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <p class="text-danger">Er is van dit product op dit moment geen voorraad aanwezig, de verwachte eerstvolgende levering is: {{ $VolgendeLevering }}</p>
-                        <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
-                    </div>
-                    <meta http-equiv="refresh" content="4;url={{ route('magazijn.index') }}">
-                @else
-
-                    <table class="table table-striped table-bordered align-middle shadow-sm mt-3">
-                        <thead>
+                <table class="table table-striped table-bordered align-middle shadow-sm mt-3">
+                    <thead>
+                        <tr>
+                            <th><strong>Naam Product</strong></th>
+                            <th><strong>Aantal in magazijn</strong></th>
+                            <th><strong>Verpakkingseenheid</strong></th>
+                            <th><strong>Laatste levering</strong></th>
+                            <th><strong>Nieuwe levering</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($productleveringinfo as $productinfo)
                             <tr>
-                                <th><strong>Naam Product</strong></th>
-                                <th><strong>Datum Laatste levering</strong></th>
-                                <th><strong>Aantal</strong></th>
-                                <th><strong>Eerst volgende levering</strong></th>
+                                <td>{{ $productinfo->ProductNaam }}</td>
+                                <td>{{ $productinfo->AantalAanwezig }}</td>
+                                <td>{{ $productinfo->VerpakkingsEenheidKG }}</td>
+                                <td>{{ $productinfo->DatumLevering }}</td>
+                                <td><i class="bi bi-plus-square"></i></td>
                             </tr>
-                        </thead>
-                        <tbody>
-
-                            @foreach($leveringinfo as $levering)
-                                <tr>
-                                    <td>{{ $levering->ProductNaam }}</td>
-                                    <td>{{ $levering->DatumLevering }}</td>
-                                    <td>{{ $levering->GeleverdAantal }}</td>
-
-                                    @if( $levering->VolgendeLevering == null )
-                                        <td class="text-danger">GEEN DATUM GEVONDEN</td>
-                                    @else
-                                        <td>{{ $levering->VolgendeLevering }}</td>
-                                    @endif
-
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
-
-                @endif --}}
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-    <a href="{{ route('magazijn.index') }}" class="btn btn-primary mt-3 w-25">Terug</a>
-</div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-end">
+                <a href="{{ route('leverantie.index') }}" class="btn btn-primary me-2 mt-3">Terug</a>
+                <a href="{{ route('home') }}" class="btn btn-primary mt-3">Home</a>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
