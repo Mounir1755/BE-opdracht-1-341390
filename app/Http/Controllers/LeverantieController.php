@@ -51,7 +51,16 @@ class LeverantieController extends Controller
         $leverancierinfo = $this->leverantieModel->sp_GetLeverancierInfoById($id);
         $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
         
-        // dd($productleveringinfo);
+        // dd($leverancierinfo);
+        if (empty($productleveringinfo)) {
+            return view('leverantie.show', [
+                'title' => 'Geleverde producten',
+                'leverancierinfo' => $leverancierinfo[0],
+                'productleveringinfo' => null,
+                'error' => 'Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin.'
+            ]);
+        }
+        
 
         return view('leverantie.show', [
             'title' => 'Geleverde producten',

@@ -12,6 +12,7 @@
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white"></div>
             <div class="card-body">
+            
                 <h1>{{ $title }}</h1>
                 <hr style="border: rgb(0, 0, 0) 1px solid;" class="w-90">
             
@@ -32,15 +33,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($productleveringinfo as $productinfo)
+                        @if(isset($error)) 
                             <tr>
-                                <td>{{ $productinfo->ProductNaam }}</td>
-                                <td>{{ $productinfo->AantalAanwezig }}</td>
-                                <td>{{ $productinfo->VerpakkingsEenheidKG }}</td>
-                                <td>{{ $productinfo->DatumLevering }}</td>
-                                <td><i class="bi bi-plus-square"></i></td>
+                                <td colspan="5" style="text-align: center;">{{ $error }}</td>
+                                <meta http-equiv="refresh" content="3;url={{ route('leverantie.index') }}">
                             </tr>
-                        @endforeach
+                        @else
+                            @foreach($productleveringinfo as $productinfo)
+                                <tr>
+                                    <td>{{ $productinfo->ProductNaam }}</td>
+                                    <td>{{ $productinfo->AantalAanwezig }}</td>
+                                    <td>{{ $productinfo->VerpakkingsEenheidKG }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($productinfo->DatumLevering)); }}</td>
+                                    <td><i class="bi bi-plus-square"></i></td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

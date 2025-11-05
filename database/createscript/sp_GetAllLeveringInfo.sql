@@ -14,9 +14,11 @@ BEGIN
     FROM 
         productperleverancier AS PDLV
     INNER JOIN 
-        Leverancier AS LVRN ON PDLV.LeverancierId = LVRN.Id
+        Leverancier AS LVRN 
+        ON PDLV.LeverancierId = LVRN.Id
     INNER JOIN 
-        Product AS PROD ON PDLV.ProductId = PROD.Id
+        Product AS PROD
+        ON PDLV.ProductId = PROD.Id
     GROUP BY 
         LVRN.Id, LVRN.Naam, LVRN.ContactPersoon, LVRN.LeverancierNummer, LVRN.Mobiel
     ORDER BY 

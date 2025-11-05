@@ -12,10 +12,14 @@ BEGIN
         MAGA.VerpakkingsEenheidKG,
         PDLV.DatumLevering
     FROM Leverancier AS LVRN
-    INNER JOIN productperleverancier AS PDLV ON LVRN.Id = PDLV.LeverancierId
-    INNER JOIN product AS PROD ON PDLV.ProductId = PROD.Id
-    INNER JOIN magazijn AS MAGA ON PROD.Id = MAGA.ProductId
-    WHERE LVRN.Id = LVRN_id;
+    INNER JOIN productperleverancier AS PDLV 
+        ON LVRN.Id = PDLV.LeverancierId
+    INNER JOIN product AS PROD 
+        ON PDLV.ProductId = PROD.Id
+    INNER JOIN magazijn AS MAGA 
+        ON PROD.Id = MAGA.ProductId
+    WHERE LVRN.Id = LVRN_id
+    ORDER BY AantalAanwezig DESC;
 END$$
 
 DELIMITER ;
