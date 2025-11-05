@@ -30,7 +30,7 @@ class LeverantieController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
         //
     }
@@ -51,7 +51,7 @@ class LeverantieController extends Controller
         $leverancierinfo = $this->leverantieModel->sp_GetLeverancierInfoById($id);
         $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
         
-        // dd($leverancierinfo);
+        // dd($productleveringinfo);
         if (empty($productleveringinfo)) {
             return view('leverantie.show', [
                 'title' => 'Geleverde producten',
@@ -73,9 +73,23 @@ class LeverantieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $leverantie)
+    public function edit($id)
     {
-        //
+        $leverancierinfoArray = $this->leverantieModel->sp_GetLeverancierInfoById($id);
+        $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
+
+        if(empty($leverancierinfoArray)) {
+            return redirect()->back()->with('error', 'Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin');
+        }
+
+        // pak eerste item
+        $leverancierinfo = $leverancierinfoArray[0];
+        
+        return view('leverantie.edit', [
+            'title' => 'Leverancier maken',
+            'leverancierinfo' => $leverancierinfo,
+            'productleveringinfo' => $productleveringinfo[0]
+        ]);
     }
 
     /**
@@ -83,7 +97,13 @@ class LeverantieController extends Controller
      */
     public function update(Request $request, string $leverantie)
     {
-        //
+        // Validate
+        $data = $request->validate([
+            'VerpakkingsEenheidKG', 'required|string|max:255',
+            'DatumLevering', 'required'
+        ]);
+        // Store
+        // Redirect
     }
 
     /**

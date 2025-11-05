@@ -7,6 +7,7 @@ CREATE PROCEDURE Sp_GetLeverancierInfoById(
 )
 BEGIN
     SELECT 
+        LVRN.id,
         LVRN.Naam AS LeverancierNaam,
         LVRN.ContactPersoon,
         LVRN.LeverancierNummer,

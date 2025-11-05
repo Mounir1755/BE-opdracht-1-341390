@@ -1,25 +1,30 @@
-DROP PROCEDURE IF EXISTS sp_GetProductLeveringInfo;
+DROP PROCEDURE IF EXISTS Sp_GetProductLeveringInfo;
 
 DELIMITER $$
 
-CREATE PROCEDURE sp_GetProductLeveringInfo(
-	IN LVRN_id INT
+CREATE PROCEDURE Sp_GetProductLeveringInfo(
+    IN p_id INT
 )
 BEGIN
     SELECT 
         PROD.Naam AS ProductNaam,
-        MAGA.AantalAanwezig,
-        MAGA.VerpakkingsEenheidKG,
-        PDLV.DatumLevering
-    FROM Leverancier AS LVRN
-    INNER JOIN productperleverancier AS PDLV 
-        ON LVRN.Id = PDLV.LeverancierId
-    INNER JOIN product AS PROD 
-        ON PDLV.ProductId = PROD.Id
-    INNER JOIN magazijn AS MAGA 
-        ON PROD.Id = MAGA.ProductId
-    WHERE LVRN.Id = LVRN_id
-    ORDER BY AantalAanwezig DESC;
+        MAX(MAGA.AantalAanwezig) AS AantalAanwezig,
+        MAX(MAGA.VerpakkingsEenheidKG) AS VerpakkingsEenheidKG,
+        MAX(PDLV.DatumLevering) AS LaatsteLevering
+    FROM 
+        ProductPerLeverancier AS PDLV
+    INNER JOIN 
+        Leverancier AS LVRN ON LVRN.Id = PDLV.LeverancierId
+    INNER JOIN 
+        Product AS PROD ON PROD.Id = PDLV.ProductId
+    INNER JOIN 
+        Magazijn AS MAGA ON MAGA.ProductId = PROD.Id
+    WHERE 
+        LVRN.Id = p_id
+    GROUP BY 
+        PROD.Naam
+    ORDER BY 
+        LaatsteLevering DESC;
 END$$
 
 DELIMITER ;

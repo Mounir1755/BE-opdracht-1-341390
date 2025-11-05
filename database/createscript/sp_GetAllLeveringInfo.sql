@@ -10,7 +10,7 @@ BEGIN
         LVRN.ContactPersoon,
         LVRN.LeverancierNummer,
         LVRN.Mobiel,
-        COUNT(PROD.Id) AS TotaalProducten
+        COUNT(DISTINCT PROD.Id) AS TotaalProducten
     FROM 
         productperleverancier AS PDLV
     INNER JOIN 

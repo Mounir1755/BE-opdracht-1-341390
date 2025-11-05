@@ -44,8 +44,12 @@
                                     <td>{{ $productinfo->ProductNaam }}</td>
                                     <td>{{ $productinfo->AantalAanwezig }}</td>
                                     <td>{{ $productinfo->VerpakkingsEenheidKG }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($productinfo->DatumLevering)); }}</td>
-                                    <td><i class="bi bi-plus-square"></i></td>
+                                    <td>{{ date('d-m-Y', strtotime($productinfo->LaatsteLevering)); }}</td>
+                                    <td>
+                                        <a href="{{ route('leverantie.edit', ['id' => $leverancierinfo->id]) }}">
+                                            <i class="bi bi-plus-square"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         @endif

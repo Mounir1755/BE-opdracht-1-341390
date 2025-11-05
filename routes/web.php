@@ -16,6 +16,10 @@ Route::get('/', function () {
 
 Route::get('/levering-info', [LeverantieController::class, 'index'])->name('leverantie.index');
 
+Route::get('/levering-info/{id}/edit', [LeverantieController::class, 'edit'])->name('leverantie.edit');
+
+Route::post('/levering-info', [LeverantieController::class, 'store'])->name('leverantie.store');
+
 Route::get('/levering-info/{id}', [LeverantieController::class, 'show'])->name('leverantie.show');
 
 Route::get('/magazijn/{id}', [MagazijnController::class, 'show'])->name('magazijn.show');
