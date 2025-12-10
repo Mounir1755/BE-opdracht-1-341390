@@ -1,8 +1,8 @@
-DROP PROCEDURE IF EXISTS Sp_GetProductLeveringInfo;
+DROP PROCEDURE IF EXISTS Sp_GetProductenPerLeverancier;
 
 DELIMITER $$
 
-CREATE PROCEDURE Sp_GetProductLeveringInfo(
+CREATE PROCEDURE Sp_GetProductenPerLeverancier(
     IN p_id INT
 )
 BEGIN
@@ -21,7 +21,7 @@ BEGIN
     INNER JOIN 
         Magazijn AS MAGA ON MAGA.ProductId = PROD.Id
     WHERE 
-        PROD.Id = p_id
+        LVRN.Id = p_id
     GROUP BY 
         PROD.Naam
     ORDER BY 

@@ -42,11 +42,15 @@
                             @foreach($productleveringinfo as $productinfo)
                                 <tr>
                                     <td>{{ $productinfo->ProductNaam }}</td>
-                                    <td>{{ $productinfo->AantalAanwezig }}</td>
+                                        @if($productinfo->AantalAanwezig <= 0) 
+                                            <td class="text-danger">0</td>
+                                        @else 
+                                            <td>{{ $productinfo->AantalAanwezig }}</td>
+                                        @endif
                                     <td>{{ $productinfo->VerpakkingsEenheidKG }}</td>
                                     <td>{{ date('d-m-Y', strtotime($productinfo->LaatsteLevering)); }}</td>
                                     <td>
-                                        <a href="{{ route('leverantie.edit', ['id' => $leverancierinfo->id]) }}">
+                                        <a href="{{ route('leverantie.create', ['leverancierid' => $leverancierinfo->LeverancierId, 'productid' => $productinfo->ProductId]) }}">
                                             <i class="bi bi-plus-square"></i>
                                         </a>
                                     </td>

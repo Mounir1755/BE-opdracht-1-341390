@@ -30,9 +30,29 @@ class LeverantieController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($id)
+    public function create(Request $request)
     {
-        //
+
+        $productId = $request->route('productid');
+        $leverancierId = $request->route('leverancierid');
+
+        // Maak nieuwe sp aan want wat er nu gebeurd is dat hij gaat checken of de leverancier id bestaat maar hij moet checken op product id
+        $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($productId);
+        $leverancierinfoArray = $this->leverantieModel->sp_GetLeverancierInfoById($leverancierId);
+        
+
+        if(empty($leverancierinfoArray)) {
+            return redirect()->back()->with('error', 'Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin');
+        }
+
+        // pak eerste item
+        $leverancierinfo = $leverancierinfoArray[0];
+        
+        return view('leverantie.create', [
+            'title' => 'Leverancier maken',
+            'leverancierinfo' => $leverancierinfo,
+            'productleveringinfo' => $productleveringinfo[0]
+        ]);
     }
 
     /**
@@ -40,7 +60,16 @@ class LeverantieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate
+        $data = $request->validate([
+            'LeverancierId',                'required',
+            'ProductId',                    'required',
+            'AantalAanwezig',               'required|string|max:255',
+            'DatumEerstVolgendeLevering',   'required'
+        ]);
+        // Store
+        $nieuwelevering = $this->leverantieModel->sp_CreateNewLevering($data);
+        // Redirect
     }
 
     /**
@@ -49,18 +78,17 @@ class LeverantieController extends Controller
     public function show($id)
     {
         $leverancierinfo = $this->leverantieModel->sp_GetLeverancierInfoById($id);
-        $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
+        $productleveringinfo = $this->leverantieModel->sp_GetProductenPerLeverancier($id);
         
         // dd($productleveringinfo);
         if (empty($productleveringinfo)) {
             return view('leverantie.show', [
                 'title' => 'Geleverde producten',
-                'leverancierinfo' => $leverancierinfo[0],
+                'leverancierinfo' => null,
                 'productleveringinfo' => null,
                 'error' => 'Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin.'
             ]);
         }
-        
 
         return view('leverantie.show', [
             'title' => 'Geleverde producten',
@@ -74,22 +102,8 @@ class LeverantieController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit($id)
-    {
-        $leverancierinfoArray = $this->leverantieModel->sp_GetLeverancierInfoById($id);
-        $productleveringinfo = $this->leverantieModel->sp_GetProductLeveringInfo($id);
-
-        if(empty($leverancierinfoArray)) {
-            return redirect()->back()->with('error', 'Dit bedrijf heeft tot nu toe geen producten geleverd aan Jamin');
-        }
-
-        // pak eerste item
-        $leverancierinfo = $leverancierinfoArray[0];
-        
-        return view('leverantie.edit', [
-            'title' => 'Leverancier maken',
-            'leverancierinfo' => $leverancierinfo,
-            'productleveringinfo' => $productleveringinfo[0]
-        ]);
+    {   
+        //
     }
 
     /**
@@ -97,13 +111,7 @@ class LeverantieController extends Controller
      */
     public function update(Request $request, string $leverantie)
     {
-        // Validate
-        $data = $request->validate([
-            'VerpakkingsEenheidKG', 'required|string|max:255',
-            'DatumLevering', 'required'
-        ]);
-        // Store
-        // Redirect
+        //
     }
 
     /**

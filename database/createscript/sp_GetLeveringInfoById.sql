@@ -13,15 +13,15 @@ BEGIN
         LVRN.Mobiel,
         PROD.Naam AS ProductNaam,
         MAGA.AantalAanwezig AS MagazijnAantal,
-        PDLV.AantalAanwezig AS GeleverdAantal,
+        PROD.AantalAanwezig AS GeleverdAantal,
         PDLV.DatumLevering,
         PDLV.DatumEerstVolgendeLevering AS VolgendeLevering
     FROM productperleverancier AS PDLV
-    INNER JOIN Leverancier AS LVRN 
+    INNER JOIN leverancier AS LVRN 
         ON PDLV.LeverancierId = LVRN.Id
-    INNER JOIN Product AS PROD 
+    INNER JOIN product AS PROD 
         ON PDLV.ProductId = PROD.Id
-    INNER JOIN Magazijn AS MAGA
+    INNER JOIN magazijn AS MAGA
         ON MAGA.ProductId = PROD.Id
     WHERE PDLV.ProductId = p_id
     ORDER BY PDLV.DatumLevering ASC;

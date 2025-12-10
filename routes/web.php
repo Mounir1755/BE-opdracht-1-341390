@@ -16,7 +16,7 @@ Route::get('/', function () {
 
 Route::get('/levering-info', [LeverantieController::class, 'index'])->name('leverantie.index');
 
-Route::get('/levering-info/{id}/edit', [LeverantieController::class, 'edit'])->name('leverantie.edit');
+Route::get('/levering-info/{leverancierid}/create/{productid}', [LeverantieController::class, 'create'])->name('leverantie.create');
 
 Route::post('/levering-info', [LeverantieController::class, 'store'])->name('leverantie.store');
 

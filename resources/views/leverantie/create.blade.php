@@ -22,13 +22,15 @@
                 @endif 
                 <form id="storelevering" method="POST" action="{{ route('leverantie.store') }}">
                     @csrf
+                    <input type="hidden" id="LeverancierId" value="{{ $leverancierinfo->LeverancierId}}" >
+                    <input type="hidden" id="ProductId"     value="{{ $productleveringinfo->ProductId }}">
                     <div class="mb-3">
                         <label for="VerpakkingsEenheidKG" class="form-label"><strong>Aantal Producteenheden</strong></label>
                         <input type="number" class="form-control" id="VerpakkingsEenheidKG">
                     </div>
                     <div class="mb-3">
                         <label for="DatumLevering" class="form-label"><strong>Datum Eerstvolgende Levering</strong></label>
-                        <input type="date" class="form-control" id="DatumLevering">
+                        <input type="date" class="form-control" id="DatumEerstVolgendeLevering">
                     </div>   
                 </form>
             </div>
