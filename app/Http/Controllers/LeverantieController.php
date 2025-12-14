@@ -76,7 +76,7 @@ class LeverantieController extends Controller
 
         if ($data['IsActief'] == 0) {
             return redirect()->back()->withErrors([
-                'product' => 'Het product ' . $data['ProductNaam'] . ' van leverancier ' . $data['LeverancierNaam'] . ' is niet actief.'
+                'product' => 'Het product ' . $data['ProductNaam'] . ' van de leverancier ' . $data['LeverancierNaam'] . ' wordt niet meer geproduceerd.'
             ]);
         }
 
