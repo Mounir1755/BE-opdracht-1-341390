@@ -11,6 +11,7 @@ BEGIN
         PROD.Naam AS ProductNaam,
         MAX(MAGA.AantalAanwezig) AS AantalAanwezig,
         MAX(MAGA.VerpakkingsEenheidKG) AS VerpakkingsEenheidKG,
+        MAX(MAGA.IsActief) AS IsActief,
         MAX(PDLV.DatumLevering) AS LaatsteLevering
     FROM 
         ProductPerLeverancier AS PDLV

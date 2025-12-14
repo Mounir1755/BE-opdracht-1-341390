@@ -11,7 +11,13 @@
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white"></div>
             <div class="card-body">
-            
+                @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ $errors->first() }}
+                        <button type="button" class="btn-close" aria-label="sluiten" data-bs-dismiss="alert"></button>
+                    </div>
+                    <meta http-equiv="refresh" content="4;url={{ route('leverantie.create', ['leverancierid' => $leverancierinfo->LeverancierId, 'productid' => $productleveringinfo->ProductId]) }}">
+                @endif
                 <h1>{{ $title }}</h1>
                 <hr style="border: rgb(0, 0, 0) 1px solid;" class="w-90">
                 @if($leverancierinfo)
@@ -22,8 +28,11 @@
                 @endif 
                 <form method="POST" action="{{ route('leverantie.store') }}">
                     @csrf
-                    <input type="hidden" id="LeverancierId" name="LeverancierId" value="{{ $leverancierinfo->LeverancierId}}" >
-                    <input type="hidden" id="ProductId"     name="ProductId"     value="{{ $productleveringinfo->ProductId }}">
+                    <input type="hidden" id="LeverancierId" name="LeverancierId"     value="{{ $leverancierinfo->LeverancierId }}" >
+                    <input type="hidden" id="ProductId"     name="ProductId"         value="{{ $productleveringinfo->ProductId }}">
+                    <input type="hidden" id="ProductId"     name="ProductNaam"       value="{{ $productleveringinfo->ProductNaam }}">
+                    <input type="hidden" id="ProductId"     name="LeverancierNaam"   value="{{ $leverancierinfo->LeverancierNaam }}">
+                    <input type="hidden" id="IsActief"      name="IsActief"          value="{{ $productleveringinfo->IsActief }}"  >
                     <div class="mb-3">
                         <label for="AantalAanwezig" class="form-label"><strong>Aantal Producteenheden</strong></label>
                         <input type="number" class="form-control" id="AantalAanwezig" name="AantalAanwezig">

@@ -62,14 +62,23 @@ class LeverantieController extends Controller
     {
         // Validate
         $data = $request->validate([
-            'LeverancierId' =>                  'required',
-            'ProductId' =>                      'required',
-            'AantalAanwezig' =>                 'required|integer',
+            'LeverancierId'              =>     'required',
+            'ProductId'                  =>     'required',
+            'ProductNaam'                =>     'required',
+            'LeverancierNaam'            =>     'required',
+            'IsActief'                   =>     'required',
+            'AantalAanwezig'             =>     'required|integer',
             'DatumEerstVolgendeLevering' =>     'required'
         ]);
         // Store
         $datum = date_create($data['DatumEerstVolgendeLevering']);
         $data['DatumEerstVolgendeLevering'] = date_format($datum, "Y-m-d");
+
+        if ($data['IsActief'] == 0) {
+            return redirect()->back()->withErrors([
+                'product' => 'Het product ' . $data['ProductNaam'] . ' van leverancier ' . $data['LeverancierNaam'] . ' is niet actief.'
+            ]);
+        }
 
         // dd($data);
         $this->leverantieModel->sp_CreateNewLevering($data);
