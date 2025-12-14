@@ -27,8 +27,16 @@ class LeverantieModel extends Model
         return DB::select('CALL Sp_GetProductLeveringInfo(?)', [$id]);
     }
     
-    public function sp_CreateNewLevering($id) 
+    public function sp_CreateNewLevering($data) 
     {
-        return DB::select('CALL Sp_CreateNewLevering(?)', [$id]);
+        DB::statement('CALL Sp_CreateNewLevering(?, ?, ?, ?)', [
+            $data['LeverancierId'],
+            $data['ProductId'],
+            $data['AantalAanwezig'],
+            $data['DatumEerstVolgendeLevering']
+        ]);
+
+        return true;
     }
+
 }

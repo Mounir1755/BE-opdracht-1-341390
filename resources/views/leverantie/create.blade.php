@@ -20,18 +20,19 @@
                     <p><strong>Contactpersoon:</strong> {{ $leverancierinfo->ContactPersoon }}</p>
                     <p><strong>Mobiel:</strong> {{ $leverancierinfo->Mobiel }}</p>
                 @endif 
-                <form id="storelevering" method="POST" action="{{ route('leverantie.store') }}">
+                <form method="POST" action="{{ route('leverantie.store') }}">
                     @csrf
-                    <input type="hidden" id="LeverancierId" value="{{ $leverancierinfo->LeverancierId}}" >
-                    <input type="hidden" id="ProductId"     value="{{ $productleveringinfo->ProductId }}">
+                    <input type="hidden" id="LeverancierId" name="LeverancierId" value="{{ $leverancierinfo->LeverancierId}}" >
+                    <input type="hidden" id="ProductId"     name="ProductId"     value="{{ $productleveringinfo->ProductId }}">
                     <div class="mb-3">
-                        <label for="VerpakkingsEenheidKG" class="form-label"><strong>Aantal Producteenheden</strong></label>
-                        <input type="number" class="form-control" id="VerpakkingsEenheidKG">
+                        <label for="AantalAanwezig" class="form-label"><strong>Aantal Producteenheden</strong></label>
+                        <input type="number" class="form-control" id="AantalAanwezig" name="AantalAanwezig">
                     </div>
                     <div class="mb-3">
                         <label for="DatumLevering" class="form-label"><strong>Datum Eerstvolgende Levering</strong></label>
-                        <input type="date" class="form-control" id="DatumEerstVolgendeLevering">
-                    </div>   
+                        <input type="date" class="form-control" id="DatumEerstVolgendeLevering" name="DatumEerstVolgendeLevering">
+                    </div> 
+                    <button type="submit" class="btn btn-primary w-25">Sla op</button>  
                 </form>
             </div>
         </div>
@@ -40,7 +41,7 @@
         <div class="row mt-2">
             <div class="col-12 d-flex">
                 {{-- links --}}
-                <button form="storelevering" type="submit" class="btn btn-primary w-25">Sla op</button>
+                
 
                 {{-- rechts --}}
                 <a href="{{ route('home') }}" class="btn btn-primary ms-auto">Home</a>

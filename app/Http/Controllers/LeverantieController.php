@@ -62,14 +62,21 @@ class LeverantieController extends Controller
     {
         // Validate
         $data = $request->validate([
-            'LeverancierId',                'required',
-            'ProductId',                    'required',
-            'AantalAanwezig',               'required|string|max:255',
-            'DatumEerstVolgendeLevering',   'required'
+            'LeverancierId' =>                  'required',
+            'ProductId' =>                      'required',
+            'AantalAanwezig' =>                 'required|integer',
+            'DatumEerstVolgendeLevering' =>     'required'
         ]);
         // Store
-        $nieuwelevering = $this->leverantieModel->sp_CreateNewLevering($data);
+        $datum = date_create($data['DatumEerstVolgendeLevering']);
+        $data['DatumEerstVolgendeLevering'] = date_format($datum, "Y-m-d");
+
+        // dd($data);
+        $this->leverantieModel->sp_CreateNewLevering($data);
         // Redirect
+        return redirect()->route('leverantie.index')
+                        ->with('success', 'Levering succesvol opgeslagen');
+
     }
 
     /**
